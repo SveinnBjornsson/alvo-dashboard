@@ -86,7 +86,7 @@ td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
       <div><h1>Alvotech (NASDAQ: ALVO) — Live Dashboard</h1>
       <div class="sub">Biosimilars / Specialty Pharma · S2F Research model</div></div>
     </div>
-    <div class="tag"><span class="rate">BUY</span> · High risk<br>S2F 12-mo target <b style="color:#fff">$11.79</b> · Street <b style="color:#fff">$5.75</b></div>
+    <div class="tag"><span class="rate">BUY</span> · High risk<br>S2F 12-mo target <b style="color:#fff">$10.80</b> · Street <b style="color:#fff">$5.75</b></div>
   </div>
 
   <div class="pricebar">
@@ -123,7 +123,7 @@ td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
       <h2>Valuation football field</h2>
       <p class="hint">S2F methods (blue/orange) vs. Street targets (grey). Vertical line = current price (drag the price field to move it).</p>
       <div class="chartbox tall"><canvas id="ff"></canvas></div>
-      <p class="note">Street consensus has compressed to ~$5.75 (5 analysts, Buy) as of Aug-26 — well below the S2F model, which prices in pipeline optionality. Deutsche Bank $4 / Hold is the bear.</p>
+      <p class="note">S2F blended target re-anchored to <b>$10.80</b> (pro-forma, post-raise dilution). Street consensus ~$5.75 (5 analysts) sits well below the S2F model, which prices in pipeline optionality; Deutsche Bank $4 / Hold is the bear.</p>
     </div>
     <div class="card">
       <h2>Upside to targets</h2>
@@ -186,7 +186,7 @@ const LASTCLOSE = 3.76;  // 5 Aug 2026 close
 const S2F = [
   {label:'DCF — Gordon (floor)', v:7.80,  grp:'s2f'},
   {label:'DCF — pipeline-adj',  v:10.33, grp:'s2f'},
-  {label:'Blended target',      v:11.79, grp:'s2f'},
+  {label:'Blended (pro-forma)', v:10.80, grp:'s2f'},
   {label:'EV/EBITDA (12x)',     v:12.35, grp:'s2f'},
   {label:'DCF — exit multiple', v:12.68, grp:'s2f'}
 ];
@@ -215,7 +215,7 @@ function renderKPIs(){
   const mcap=p*SHARES;            // $m
   const ev=mcap+NETDEBT;          // $m
   const evx=ev/EBITDA26;          // x
-  const up=(11.79/p-1)*100;
+  const up=(10.80/p-1)*100;
   const vsClose=(p/LASTCLOSE-1)*100;
   const cards=[
     {k:'Share price', v:fmtUSD(p), s:(vsClose>=0?'+':'')+vsClose.toFixed(1)+'% vs last close', cls:vsClose>=0?'green':'red'},
@@ -223,7 +223,7 @@ function renderKPIs(){
     {k:'Net debt (PF)', v:fmtBn(NETDEBT), s:'post-raise'},
     {k:'Enterprise value', v:fmtBn(ev), s:'mcap + net debt'},
     {k:'EV/EBITDA (FY26E)', v:evx.toFixed(1)+'x', s:'on $'+EBITDA26+'m'},
-    {k:'Upside to $11.79', v:fmtPct(up), s:'blended target', cls:up>=0?'green':'red'}
+    {k:'Upside to $10.80', v:fmtPct(up), s:'pro-forma blended', cls:up>=0?'green':'red'}
   ];
   document.getElementById('kpis').innerHTML=cards.map(c=>
     `<div class="kpi"><div class="k">${c.k}</div><div class="v ${c.cls||''}">${c.v}</div><div class="s">${c.s||''}</div></div>`).join('');
